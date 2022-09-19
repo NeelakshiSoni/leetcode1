@@ -1,0 +1,22 @@
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        char = collections.Counter()
+        reslen = - float("infinity")
+        i = 0 
+        j = 0 
+        
+        while j < len(nums):
+            print(char)
+            char[nums[j]]+=1 
+            
+            while char[0]> k : 
+                char[nums[i]]-=1 
+                i+=1
+            
+            
+               
+            reslen = max(reslen , j-i+1)
+            
+            j+=1
+        return reslen
+        
