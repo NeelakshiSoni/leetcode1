@@ -1,0 +1,22 @@
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
+        char = collections.defaultdict(int)
+        
+        i = 0 
+        j = 0 
+        reslen = - float("infinity")
+        
+        while j < len(s):
+            char[s[j]]+=1
+            
+            while len(char)> 2 :
+                
+                char[s[i]]-=1
+                if char[s[i]]== 0 :
+                    del char[s[i]]
+                i+=1
+                    
+            reslen = max(reslen , j-i+1)
+            j+=1
+            
+        return resle
