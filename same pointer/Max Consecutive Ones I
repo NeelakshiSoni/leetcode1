@@ -1,0 +1,19 @@
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        reslen = - float("infinity")
+        
+        char = collections.Counter()
+        i = 0 
+        j= 0 
+        
+        while j < len(nums):
+            char[nums[j]]+=1 
+            
+            while char[0]>0 :
+                char[nums[i]]-=1 
+                i+=1
+                
+            reslen = max(reslen, j-i+1)
+            j+=1
+            
+        return reslen
