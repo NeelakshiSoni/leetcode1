@@ -1,0 +1,68 @@
+
+
+approach1 : - 
+
+class Solution:
+    def longestSubsequence(self, arr: List[int], diff: int) -> int:
+        def dfs( i  , prev , arr , diff) : 
+            if i == len(arr) : 
+                return 0 
+            
+            if (i , prev) in memo : 
+                return memo[(i , prev)]
+            
+            take = 0 
+            not_take = 0 
+            
+            if arr[i]- prev == diff : 
+                take = 1 + dfs(i+1 , arr[i] , arr , diff) 
+                
+            not_take = dfs(i+1 , prev , arr , diff) 
+            memo[(i , prev)] = max(take , not_take)
+            
+            return max(take , not_take)
+        
+        result = 0 
+        for i in range(len(arr)) : 
+            memo = {}
+            result= max(result , 1+ dfs(i+1  , arr[i] , arr , diff))
+            
+        return result 
+
+
+approach2 :- 
+
+
+class Solution:
+    def longestSubsequence(self, arr: List[int], diff: int) -> int:
+        memo = {}
+        
+        
+        def dfs(i , prev , arr , diff ) : 
+            if i == len(arr) : 
+                return 0 
+            
+            if (i , prev) in memo : 
+                return memo[(i , prev)]
+            
+            take = 0 
+            not_take = 0 
+            
+            if prev == -10000 : 
+                not_take = dfs(i+1 , prev , arr , diff) 
+                take = 1+ dfs(i+1 , arr[i] , arr , diff)
+            else : 
+                if arr[i] - prev == diff : 
+                    take = 1 + dfs(i+1 , arr[i] , arr , diff)
+                not_take = dfs(i+1,prev , arr , diff) 
+            memo[(i , prev)] = max(take , not_take )    
+            return max(take , not_take)
+        
+        
+        return dfs(0 , -10000 , arr , diff) 
+        
+
+
+approach3 - dp - 
+
+        
