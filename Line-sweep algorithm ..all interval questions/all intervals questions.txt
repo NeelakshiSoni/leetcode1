@@ -1,0 +1,224 @@
+https://leetcode.com/discuss/study-guide/2166045/line-sweep-algorithms
+
+
+1. Insert interval 
+https://leetcode.com/problems/insert-interval/
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        
+        intervals.append(newInterval) 
+        events =[]
+        
+        for x , y in intervals: 
+            events.append((x , 1))
+            events.append((y , -1)) 
+            
+        events.sort(key = lambda x : (x[0] , -x[1]))
+        
+        res = []
+        state = 0 
+        
+        
+        for pos , val in events : 
+            state += val 
+            
+            if val == 1 and state == 1 : 
+                start = pos 
+            elif val == -1 and state == 0 : 
+                end = pos 
+                
+                res.append([start , end])
+                
+        return res 
+
+
+
+
+2. """
+https://leetcode.com/problems/my-calendar-iii/ 
+My calendar3
+
+
+
+class MyCalendarThree:
+
+    def __init__(self):
+        self.interval = defaultdict(int)
+        
+        
+
+    def book(self, startTime: int, endTime: int) -> int:
+        self.interval[startTime] +=1 
+        self.interval[endTime] -= 1 
+        state = 0
+        change = 0 
+        for val in sorted(self.interval) : 
+            change += self.interval[val] 
+            if change > state : 
+                state = change 
+        return state
+            
+        
+
+
+# Your MyCalendarThree object will be instantiated and called as such:
+# obj = MyCalendarThree()
+# param_1 = obj.book(startTime,endTime)
+
+
+
+3. https://leetcode.com/problems/my-calendar-i/
+
+My calender1 
+
+
+
+
+
+
+class MyCalendar:
+
+    def __init__(self):
+        self.interval = defaultdict(int)
+        
+
+    def book(self, start: int, end: int) -> bool:
+        
+        self.interval[start] +=1 
+        self.interval[end] -=1 
+        #print(self.interval)
+        curr = 0
+        
+        for val in sorted(self.interval) : 
+            curr += self.interval[val] 
+            
+            if curr > 1 : 
+                self.interval[start] -=1 
+                self.interval[end] +=1 
+                return False 
+            
+        return True 
+
+
+
+4. https://leetcode.com/problems/my-calendar-ii/ 
+
+
+class MyCalendarTwo:
+
+    def __init__(self):
+        self.interval = defaultdict(int)
+        
+
+    def book(self, start: int, end: int) -> bool:
+        self.interval[start] += 1
+        self.interval[end] -=1 
+        curr = 0 
+        
+        for val in sorted(self.interval) : 
+            curr += self.interval[val] 
+            if curr > 2 : 
+                self.interval[start]-=1
+                self.interval[end] +=1 
+                return False 
+        return True 
+        
+
+5. Merge intervals 
+
+https://leetcode.com/problems/merge-intervals/
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        
+        events = []
+        
+        
+        for x , y in intervals : 
+            events.append((x , 1)) 
+            events.append((y , -1)) 
+            
+        events.sort(key = lambda x : (x[0] , -x[1]))
+        
+        """
+         [[1,4],[4,5]]
+        we have to sort in reverse direction 
+        
+        """
+       
+        
+        
+
+        state = 0 
+        res = []
+            
+            
+        for pos , event in events : 
+            state += event 
+            
+            
+            if event == 1 and state ==1 : 
+                start = pos
+                
+            elif event == -1 and state == 0 : 
+                end = pos
+                
+                res.append([start , end])
+        return res 
+
+
+
+6. https://leetcode.com/problems/meeting-rooms/
+
+
+
+class Solution:
+    def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
+        dates = [] 
+        
+        for x , y in intervals : 
+            dates.append((x , 1))
+            dates.append((y , -1)) 
+            
+            
+        dates.sort() 
+        person = 0 
+        
+        
+        for room , ppl in dates : 
+            person += ppl
+            if person > 1 : 
+                return False 
+            
+        return True 
+
+
+7. 
+https://leetcode.com/problems/meeting-rooms-ii/
+
+
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        
+        dates = []
+        
+        
+        for x , y in intervals : 
+            dates.append((x , 1))
+            dates.append((y  , -1))
+            
+            
+        dates.sort()
+        
+        
+        max_room = room  = 0 
+        for time , change in dates : 
+            room += change 
+            if room > max_room : 
+                max_room = room 
+                
+        return max_room 
+        
+        
+            
+            

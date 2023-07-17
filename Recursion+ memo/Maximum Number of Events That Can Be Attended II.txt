@@ -1,0 +1,43 @@
+class Solution:
+    def maxValue(self, events: List[List[int]], k: int) -> int:
+        events.sort()
+        
+        
+        
+        def dfs(i , start , end , k, memo ) : 
+            if k == 0 :
+                return 0 
+            
+            if i == len(events) : 
+                return 0 
+            
+            if (i , start , end , k ) in memo : 
+                return memo[( i , start , end , k)]
+            
+            max_sum = 0 
+            for j in range(i+1 , len(events)) : 
+                if events[j][0] > end and k > 0 : 
+                    max_sum = max(max_sum , events[j][2] + dfs(j , events[j][0] , events[j][1] , k -1 , memo))
+            memo[(i , start , end , k )] = max_sum        
+            return max_sum 
+                    
+                    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        max_ans = float("-inf")
+        for i  , event in enumerate(events) : 
+            memo = {}
+            max_ans = max(max_ans , event[2] + dfs(i , event[0] , event[1] , k -1, memo))
+            
+        return max_ans 
+        
+      
+                    
+        

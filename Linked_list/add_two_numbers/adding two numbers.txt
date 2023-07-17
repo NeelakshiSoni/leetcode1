@@ -1,0 +1,81 @@
+https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/
+
+polynomial add : - 
+
+def addPoly(self, poly1: 'PolyNode', poly2: 'PolyNode') -> 'PolyNode':
+        dummy = ListNode(0, 0) 
+        pre = dummy 
+        
+        while poly1 and poly2 : 
+            
+            
+            
+            if poly1.power > poly2.power  :
+                pre.next = PolyNode(poly1.coefficient , poly1.power)
+                pre = pre.next 
+                poly1 = poly1.next 
+                
+            elif poly2.power > poly1.power  :
+                pre.next = PolyNode(poly2.coefficient , poly2.power)
+                pre = pre.next 
+                poly2 = poly2.next 
+            elif poly1.power == poly2.power  :
+                if poly1.coefficient + poly2.coefficient == 0 : 
+                    poly1 = poly1.next 
+                    poly2 = poly2.next  
+                else :
+                    
+                    
+                
+                    pre.next = PolyNode(poly1.coefficient + poly2.coefficient , poly1.power)
+                    pre = pre.next 
+                    poly1 = poly1.next 
+                    poly2 = poly2.next
+        pre.next = poly1 if poly1 else poly2
+        
+        return dummy.next
+
+2. add tow numbers2
+
+
+
+  def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        
+        
+        #reverse a linkedlist 
+      
+        def reverse(head):
+            pre = None
+            curr = head 
+
+            while curr : 
+
+                temp = curr.next 
+                curr.next = pre 
+                pre = curr 
+                curr = temp 
+
+            return pre 
+           
+
+        new_l1 = reverse(l1)
+        new_l2 = reverse(l2)
+        print(new_l1 , new_l2 )
+        pre = ListNode(0)
+        dummy = pre
+        carry = 0
+        
+        while new_l1 or new_l2 or carry : 
+            
+            first = new_l1.val if new_l1 else 0 
+            second = new_l2.val if new_l2 else 0 
+            val = carry + first + second 
+            
+            carry = val//10 
+            val = val%10 
+            dummy.next = ListNode(val) 
+            dummy = dummy.next 
+            new_l1 = new_l1.next if new_l1 else None
+            new_l2 = new_l2.next if new_l2 else None
+            
+        return reverse(pre.next)
