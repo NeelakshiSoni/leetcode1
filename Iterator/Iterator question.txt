@@ -1,0 +1,132 @@
+1. https://leetcode.com/problems/zigzag-iterator/
+
+class ZigzagIterator:
+    def __init__(self, v1: List[int], v2: List[int]):
+        self.v1 = v1 
+        self.v2 = v2 
+        self.v1pos = 0 
+        self.v2pos = 0 
+        self.first = True 
+        print(self.v1) 
+        print(self.v2)
+        
+
+    def next(self) -> int:
+        
+        if self.first :
+            
+            if self.v1pos < len(self.v1) : 
+                ans = self.v1[self.v1pos]
+                self.v1pos += 1 
+                self.first = False
+                return ans 
+            else : 
+                if self.v2pos < len(self.v2): 
+                    
+                    ans = self.v2[self.v2pos]
+                    self.v2pos += 1 
+                    self.first = False 
+                    return ans 
+                    
+                
+        else:
+            if self.v2pos < len(self.v2) : 
+            
+                ans = self.v2[self.v2pos]
+                self.v2pos += 1 
+                self.first = True 
+                return ans 
+            else : 
+                if self.v1pos < len(self.v1): 
+                    
+                    ans = self.v1[self.v1pos]
+                    self.v1pos += 1 
+                    self.first = True
+                    return ans 
+                
+
+
+
+    def hasNext(self) -> bool:
+        
+        return self.v1pos < len(self.v1) or self.v2pos < len(self.v2)
+        
+
+# Your ZigzagIterator object will be instantiated and called as such:
+# i, v = ZigzagIterator(v1, v2), []
+# while i.hasNext(): v.append(i.next())
+
+
+2. https://leetcode.com/problems/binary-search-tree-iterator/
+
+ # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        
+        self.res = []
+        
+        def dfs(node) : 
+            if not node : 
+                return 
+            dfs(node.left)
+            self.res.append(node.val)
+            dfs(node.right)
+        dfs(root) 
+        self.pointer = 0 
+        
+
+    def next(self) -> int:
+        if self.pointer < len(self.res) : 
+            ans = self.res[self.pointer] 
+            self.pointer += 1 
+            return ans 
+        
+
+    def hasNext(self) -> bool:
+        return self.pointer < len(self.res)
+        
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
+
+
+
+3. https://leetcode.com/problems/flatten-2d-vector/
+ class Vector2D:
+
+    def __init__(self, vec: List[List[int]]):
+        
+        self.res = []
+        for val in vec : 
+            
+            for num in val : 
+                self.res.append(num)
+        	self._pos = 0 
+        
+
+    def next(self) -> int:
+        if self._pos < len(self.res) : 
+            ans = self.res[self._pos] 
+            self._pos += 1 
+            return ans 
+        
+        
+
+    def hasNext(self) -> bool:
+        return self._pos < len(self.res)
+        
+
+
+# Your Vector2D object will be instantiated and called as such:
+# obj = Vector2D(vec)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
