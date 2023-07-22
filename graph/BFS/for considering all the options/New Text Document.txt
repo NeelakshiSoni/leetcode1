@@ -1,0 +1,29 @@
+1 . https://leetcode.com/problems/partition-equal-subset-sum/
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        
+        
+        total = sum(nums) 
+        if total%2 : 
+            return False
+        
+        curr_sum = set()
+        curr_sum.add(0) 
+        
+        
+        for num in nums : 
+            
+            copy_curr_sum= set()
+            
+            for _sum in curr_sum : 
+                new_sum = _sum + num 
+                if new_sum == total//2 : 
+                    return True 
+                #if we add something here , the value of curr_sum willc hange
+                copy_curr_sum.add(new_sum) 
+                
+            curr_sum= curr_sum.union(copy_curr_sum)
+        return False
+        
+        

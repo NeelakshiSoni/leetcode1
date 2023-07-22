@@ -1,0 +1,23 @@
+1.  https://leetcode.com/problems/find-the-divisibility-array-of-a-string/
+
+def divisibilityArray(self, word: str, m: int) -> List[int]:
+        
+        
+        
+        pre_rem = 0 
+        output = []
+        
+        
+        for i , word in enumerate(word) : 
+            
+            
+            curr_rem = ((pre_rem*10 + int(word))% m) 
+            print(curr_rem , word)
+            
+            if curr_rem == 0 : 
+                output.append(1)
+            else : 
+                output.append(0)
+            pre_rem = curr_rem 
+            
+        return output 

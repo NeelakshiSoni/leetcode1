@@ -1,0 +1,142 @@
+1. https://leetcode.com/problems/subarray-sums-divisible-by-k/
+
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        
+        
+        prefix = 0 
+        hashmap = {0 : 1}
+        ans = 0 
+        
+        
+        
+        for i , num in enumerate(nums) : 
+            prefix += num 
+            
+            
+            if prefix%k in hashmap : 
+                ans += hashmap[prefix%k] 
+                
+                
+            hashmap[prefix%k] = 1 + hashmap.get(prefix%k , 0)
+            
+        return ans 
+
+2 . 
+
+
+https://leetcode.com/problems/subarray-sum-equals-k/
+
+
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        
+        ans = 0 
+        hashmap = {0 : 1} 
+        prefix = 0 
+        
+        
+        for i , num in enumerate(nums) : 
+            #print(hashmap)
+            
+            prefix += num 
+            
+            if prefix - k in hashmap : 
+                ans += hashmap[prefix-k] 
+                
+            hashmap[prefix] = hashmap.get(prefix , 0) + 1 
+            
+        return ans 
+        
+
+3. https://leetcode.com/problems/intervals-between-identical-elements/ 
+
+
+class Solution:
+    def getDistances(self, arr: List[int]) -> List[int]:
+        
+        graph = defaultdict(list) 
+        
+        
+        for i , num in enumerate(arr) : 
+            graph[num].append(i) 
+            
+            
+        output = [0]*(len(arr))
+        
+        
+        def cal(arr) : 
+            
+            # arr -- list of indices 
+            
+            #find total 
+            
+            total = 0 
+            n = len(arr)
+            
+            """
+            list of indices -- [a , b , c , d, e , f]
+                                0 , 1, 2,   3 , 4 
+                                
+                                
+            for d , if i want to find out 
+            
+            (d-a ) + (d-b ) + (d-c)    + (e-d) + (f - d) 
+            
+            3*d - (a+b +c) +    (e+f) - 2 *(d)
+            curr_idx *listof indices val  - (prefix_sum) + (sufffix_sum) - (n-i-1)
+            
+            
+            
+            
+            """
+            
+            for ar in arr : 
+                total += ar
+                
+            prefix = 0 
+                
+            for i , idx in enumerate(arr) : 
+                
+                
+                val_to = (i*idx)-prefix + (total-prefix - idx)- (idx * (n-i-1))
+                
+                
+                
+                output[idx] = val_to 
+                prefix += idx 
+                
+                
+            
+            
+        for k , val in  graph.items() : 
+            
+            
+            cal(val)
+            
+        return output 
+            
+
+4. class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        if len(nums) < 2 : 
+            return False 
+        
+        hashmap = {0 : -1 }
+        prefix = 0 
+        
+        
+        for i , num in enumerate(nums) : 
+            #print(hashmap)
+            prefix += num 
+            
+            remain = prefix%k 
+            
+            if remain in hashmap and i - hashmap[remain] >= 2  : 
+                return True 
+            if remain not in hashmap :
+                hashmap[remain] = i  
+            
+        return False 
+        
+        

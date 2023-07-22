@@ -1,0 +1,63 @@
+1. 2381. Shifting Letters II
+
+
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        
+        shifting_arr = [0]*(50001)
+        
+        for shift in shifts : 
+            if shift[-1] :
+                shifting_arr[shift[0]] += 1 
+                shifting_arr[shift[1] + 1] -= 1
+                
+            else : 
+                shifting_arr[shift[0]] -= 1 
+                shifting_arr[shift[1] + 1] += 1
+                
+                
+        prefix = 0 
+        
+        for i , ar in enumerate(shifting_arr) : 
+            prefix += ar 
+            shifting_arr[i] = prefix 
+            
+                    
+        list_s = list(s) 
+        #print(shifting_arr)
+        
+        for i , char in enumerate(list_s) : 
+            
+            
+            new_chr = ord(char)- ord("a") + shifting_arr[i] 
+            val = new_chr %26 
+            #print(val)
+            list_s[i] = chr(val + ord("a")) 
+        #print(list_s)
+            
+        return "".join(list_s)
+
+
+2. 370. Range Addition
+
+
+class Solution:
+    def getModifiedArray(self, length: int, updates: List[List[int]]) -> List[int]:
+        
+        arr = [0]*(length+1) 
+        
+        
+        for up in updates : 
+            #print(arr)
+            arr[up[0]] += (up[2]) 
+            arr[up[1]+1] -= (up[2]) 
+            
+        prefix = 0 
+        #print(arr)
+        for  i , ar in enumerate(arr) : 
+            prefix += ar 
+            
+            
+            arr[i] = prefix 
+            
+        return arr[:length]

@@ -1,0 +1,34 @@
+1. https://leetcode.com/problems/asteroid-collision/
+
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        stack = []
+        
+        
+        for i , aster in enumerate(asteroids) : 
+            
+            while stack and (stack[-1] > 0 and aster < 0 ) :
+                if stack[-1]== abs(aster) : 
+                    stack.pop()
+                    break
+                elif abs(aster) > abs(stack[-1]) :
+                    stack.pop()
+                else :
+                    break
+                
+                
+                    
+            else : 
+                stack.append(aster)
+        return stack 
+                    
+
+2. robot collision 
+
+https://leetcode.com/problems/robot-collisions/
+
+
+3. Count collision on teh road 
+
+ https://leetcode.com/problems/count-collisions-on-a-road/
+        

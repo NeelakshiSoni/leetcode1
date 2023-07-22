@@ -1,0 +1,34 @@
+1. https://leetcode.com/problems/construct-smallest-number-from-di-string/ 
+
+class Solution:
+    def smallestNumber(self, pattern: str) -> str:
+        
+        
+        stack = []
+        ans = ""
+        
+        for i in range( len(pattern)+ 1): 
+            stack.append(str(i+1)) 
+            if i == len(pattern) or pattern[i] == "I" : 
+                while stack: 
+                    ans += stack.pop()
+        return ans 
+
+2. https://leetcode.com/problems/di-string-match/
+
+class Solution:
+    def diStringMatch(self, s: str) -> List[int]:
+        
+        stack = [] 
+        ans = [] 
+        
+        
+        for i in range(0 , len(s)+1): 
+            stack.append(i)
+            
+            if  i == len(s)  or s[i] == "I": 
+                while stack : 
+                    ans.append(stack.pop())
+        return ans 
+
+        
