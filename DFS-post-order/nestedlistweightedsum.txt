@@ -1,4 +1,4 @@
-link -- https://leetcode.com/problems/nested-list-weight-sum/submissions/
+1 . link -- https://leetcode.com/problems/nested-list-weight-sum/submissions/
 
 
 class Solution:
@@ -22,4 +22,75 @@ class Solution:
             return ans 
                     
         return dfs(nestedList , 1)
+
+
+2 , 688. Knight Probability in Chessboard
+
+https://leetcode.com/problems/knight-probability-in-chessboard/
+
+class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+        memo = {}
+        
+        
+        
+        def dfs( r , c , k ) : 
+            
+            if k == 0 : 
+                return 1 
+            
+            if (r , c, k) in memo : 
+                return memo[(r , c, k)]
+            
+            dire = [[-2, -1], [-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2]]
+            
+            ans = 0 
+            for dr, dc in dire: 
+                new_r, new_c = r + dr, c + dc 
+                if 0 <= new_r < n and 0 <= new_c < n:
+                    ans +=dfs(new_r , new_c , k-1)
+                    
+            memo[( r, c, k )] = ans/8
+            return ans/8
+        
+        return dfs(row , column  , k )
+
+
+3. https://leetcode.com/problems/out-of-boundary-paths/
+576. Out of Boundary Paths
+
+
+class Solution:
+    def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+        memo = {}
+        mod = 10**9 + 7 
+        
+        
+        
+        def dfs(r , c , k ) : 
+            if k == 0 : 
+                return 0
+            
+            if (r , c, k ) in memo : 
+                return memo[(r , c, k)]
+            
+            
+            
+            dire = [[1 , 0] , [0 , 1] , [-1 , 0] , [0 , -1]]
+            ans = 0 
+            
+            for dr , dc in dire : 
+                new_r , new_c = r +dr , c + dc 
+                
+                if new_r < 0 or new_r >= m or new_c < 0 or new_c >= n : 
+                    ans +=1 
+                    
+                else : 
+                    ans += dfs(new_r , new_c , k -1) 
+                    
+            memo[(r , c, k)] = ans%mod 
+            return memo[(r , c , k )]%mod
+                    
+        return dfs(startRow , startColumn , maxMove )
+                    
         

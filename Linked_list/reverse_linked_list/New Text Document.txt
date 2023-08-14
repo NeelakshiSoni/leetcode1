@@ -1,0 +1,55 @@
+def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+ 
+ 
+        def double_val(head)  : 
+            #print(head)
+ 
+ 
+            carry = double_val(head.next) if head.next else 0 
+ 
+            _sum = head.val*2 + carry 
+            head.val = _sum % 10 
+            carry = _sum // 10 
+            return carry 
+ 
+ 
+ 
+        carry = double_val(head) 
+        if carry : 
+            head = ListNode(carry , head) 
+ 
+        return head 
+ 
+ 
+2 . https://leetcode.com/problems/plus-one-linked-list/ 
+ 
+ 
+  def plusOne(self, head: ListNode) -> ListNode:
+ 
+ 
+        def plus_one(head) : 
+ 
+            if not head.next : 
+                _sum = head.val + 1 
+                carry = 0 
+ 
+                head.val = _sum % 10 
+                carry = _sum // 10 
+ 
+                return carry 
+ 
+ 
+            if head.next : 
+                carry = plus_one(head.next )
+                _sum = head.val + carry 
+ 
+ 
+                head.val = _sum % 10 
+                carry = _sum // 10 
+            return carry 
+ 
+        carry = plus_one(head) 
+        if carry : 
+            return ListNode(carry , head)
+        return head 
+ 
