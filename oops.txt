@@ -1,0 +1,5 @@
+In this round, 2 questions were given to us and we had to solve any of them in 45 minutes.
+
+Asked to redesign a solution so that congestion in different coaches in the rail service is reduced.
+Asked to Design a solution for the parking spot problem in a company in which the employees come in shifts.
+

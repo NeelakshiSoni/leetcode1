@@ -1,0 +1,7 @@
+Microsoft 
+
+For example, tell me about a time:
+— when a team member could not contribute to the team because they had a health issue
+— when all your team members knew only about the backend, and you had to develop frontend too
+— when the project assigned to you is developed on old technology
+— when you had a conflict of opinion/idea with your team member/manager.
